@@ -22,8 +22,12 @@ function createStore() {
 
     return {
         subscribe,
-        toggleCanvas: () => update(state => ({ ...state, viewCanvas: !state.viewCanvas, viewGrid: false })),
-        toggleGrid: () => update(state => ({ ...state, viewGrid: !state.viewGrid })),
+        toggleCanvas: () => update(state => {
+            return { ...state, viewCanvas: !state.viewCanvas, viewGrid: false }
+        }),
+        toggleGrid: () => update(state => {
+            return { ...state, viewGrid: !state.viewGrid }
+        }),
         toggleModal: () => update(state => ({ ...state, viewPreviewModal: !state.viewPreviewModal })),
         setColor: (color: HexColor) => update(state => {
             LocalStorageService.update({ textColor: color });

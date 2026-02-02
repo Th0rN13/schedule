@@ -7,15 +7,6 @@ export interface LocalStorageData {
     titleOffset: number;
 };
 
-// function updateLocalStorage(current: LocalStorageData, update: Partial<LocalStorageData>): LocalStorageData {
-//     for (let key in update) {
-//         if (update[key] !== undefined) {
-//             current[key] = update[key];
-//         }
-//     }
-//     return current
-// }
-
 function updateLocalStorage<T extends LocalStorageData>(
     current: T,
     update: { [K in keyof T]?: T[K] } & Record<string, unknown>
@@ -48,27 +39,15 @@ export class LocalStorageService {
         let data = localStorage.getItem('schedule') || '';
 
         let result: LocalStorageData = {
-            // init defaults
             slots: Array.from({ length: TOTAL_SCHEDULE_ITEMS }).map(() => ({ text: '', enabled: true })),
             titleOffset: 0,
             textColor: '#000000'
         };
         try {
             let raw = JSON.parse(data);
-            result = updateLocalStorage(result, { ...(raw?.daysText && { daysText: raw.daysText }) })
-            result = updateLocalStorage(result, { ...(raw?.daysText && { daysText: raw.daysText }) })
-            result = updateLocalStorage(result, { ...(raw?.daysText && { daysText: raw.daysText }) })
-            result = updateLocalStorage(result, { ...(raw?.daysText && { daysText: raw.daysText }) })
-            result = updateLocalStorage(result, { ...(raw?.daysText && { daysText: raw.daysText }) })
-            // result = {
-            //     ...result,
-            //     ...(raw?.daysText && { daysText: raw.daysText }),
-            //     ...(raw?.daysToggle && { daysToggle: raw.daysToggle }),
-            //     ...(raw?.centerOffset && { titleOffset: raw.centerOffset }),
-            //     ...(raw?.titleOffset && { titleOffset: raw.titleOffset }),
-            //     ...(raw?.textColor && { textColor: raw.textColor })
-            // };
+            result = updateLocalStorage(result, raw);
         } catch (e) {
+            this.save(result);
             console.warn('Error parsing old data');
         }
         return result;
