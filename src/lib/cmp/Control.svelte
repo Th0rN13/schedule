@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { configStore } from '$lib/stores/config';
 	import { stageStore } from '$lib/stores/stage';
+	import { getNearestMonday } from '$lib/utils';
 	import RangeSlider from 'svelte-range-slider-pips';
 
 	let currentColor = $state($configStore.textColor);
@@ -28,7 +29,8 @@
 			callback(img: string) {
 				let downloadLink = document.createElement('a');
 				let url = img.replace(/^data:image\/png/, 'data:application/octet-stream');
-				downloadLink.setAttribute('download', 'Shedule.png');
+				let mondayDate = getNearestMonday();
+				downloadLink.setAttribute('download', `${mondayDate}.png`);
 
 				downloadLink.setAttribute('href', url);
 				downloadLink.target = '_self';
