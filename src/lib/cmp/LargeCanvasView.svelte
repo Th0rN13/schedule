@@ -5,9 +5,16 @@
 	import { schedulesStore } from '$lib/stores/schedule';
 	import { chunks } from '$lib/utils';
 	import { Stage, Layer, Image, Text } from 'svelte-konva';
+	import { stageStore } from '$lib/stores/stage';
 
 	let stage: Stage | undefined = $state();
 	let image: HTMLImageElement | undefined = $state(undefined);
+
+	$effect(() => {
+		if (stage) {
+			stageStore.updateLarge(stage);
+		}
+	});
 
 	$effect(() => {
 		const img = document.createElement('img');

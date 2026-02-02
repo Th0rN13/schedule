@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { configStore } from '$lib/stores/config';
+	import { stageStore } from '$lib/stores/stage';
 	import RangeSlider from 'svelte-range-slider-pips';
 
 	let currentColor = $state($configStore.textColor);
@@ -19,6 +20,36 @@
 
 	function setcenterTextOffset() {
 		configStore.setcenterTextOffset(centerTextOffset);
+	}
+
+	function downloadLarge() {
+		let stage = $stageStore.stageLarge;
+		stage!.node.toDataURL({
+			callback(img: string) {
+				let downloadLink = document.createElement('a');
+				let url = img.replace(/^data:image\/png/, 'data:application/octet-stream');
+				downloadLink.setAttribute('download', 'Shedule.png');
+
+				downloadLink.setAttribute('href', url);
+				downloadLink.target = '_self';
+				downloadLink.click();
+			}
+		});
+	}
+
+	function downloadSmall() {
+		let stage = $stageStore.stageSmall;
+		stage!.node.toDataURL({
+			callback(img: string) {
+				let downloadLink = document.createElement('a');
+				let url = img.replace(/^data:image\/png/, 'data:application/octet-stream');
+				downloadLink.setAttribute('download', 'Shedule_small.png');
+
+				downloadLink.setAttribute('href', url);
+				downloadLink.target = '_self';
+				downloadLink.click();
+			}
+		});
 	}
 </script>
 
@@ -61,11 +92,11 @@
 <div class="section export-section">
 	<h2 class="section-title">Экспорт</h2>
 	<div class="button-group">
-		<button class="btn btn-primary">
+		<button class="btn btn-primary" onclick={downloadLarge}>
 			<span class="icon">⬇️</span>
 			Большое
 		</button>
-		<button class="btn btn-primary">
+		<button class="btn btn-primary" onclick={downloadSmall}>
 			<span class="icon">⬇️</span>
 			Маленькое
 		</button>

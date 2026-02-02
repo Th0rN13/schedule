@@ -21,23 +21,23 @@
 	</div>
 	<div class="preview-container">
 		<div class="canvas-wrapper">
-			{#if view === 'large'}
-				<div
-					class="preview-content"
-					in:fly={{ x: -2000, duration: 300 }}
-					out:fly={{ x: -2000, duration: 300 }}
-				>
-					<LargeCanvasView />
-				</div>
-			{:else}
-				<div
-					class="preview-content"
-					in:fly={{ x: 2000, duration: 300 }}
-					out:fly={{ x: 2000, duration: 300 }}
-				>
-					<SmallCanvasView />
-				</div>
-			{/if}
+			<div
+				class="preview-content"
+				class:large={view === 'large'}
+				in:fly={{ x: -2000, duration: 300 }}
+				out:fly={{ x: -2000, duration: 300 }}
+			>
+				<LargeCanvasView />
+			</div>
+
+			<div
+				class="preview-content-small"
+				class:large={view === 'large'}
+				in:fly={{ x: 2000, duration: 300 }}
+				out:fly={{ x: 2000, duration: 300 }}
+			>
+				<SmallCanvasView />
+			</div>
 		</div>
 		<div>
 			<button class="btn btn-primary" onclick={toggleView}> ⇄ </button>
@@ -63,7 +63,21 @@
 		position: absolute;
 		top: 50%;
 		left: 50%;
-		transform: translate(-50%, -50%) scale(0.4);
+		transform: translate(calc(-2000px - 50%), -50%) scale(0.4);
+		transition: 300ms;
+		&.large {
+			transform: translate(-50%, -50%) scale(0.4);
+		}
+	}
+	.preview-content-small {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%) scale(1);
+		transition: 300ms;
+		&.large {
+			transform: translate(calc(2000px - 50%), -50%) scale(1);
+		}
 	}
 	@font-face {
 		font-family: 'Gilroy-Bold';

@@ -4,9 +4,16 @@
 	import { configStore } from '$lib/stores/config';
 	import { schedulesStore } from '$lib/stores/schedule';
 	import { Stage, Layer, Image, Text } from 'svelte-konva';
+	import { stageStore } from '$lib/stores/stage';
 
-	let stageSmall: Stage | undefined = $state();
+	let stage: Stage | undefined = $state();
 	let image: HTMLImageElement | undefined = $state(undefined);
+
+	$effect(() => {
+		if (stage) {
+			stageStore.updateSmall(stage);
+		}
+	});
 
 	$effect(() => {
 		const img = document.createElement('img');
@@ -91,7 +98,7 @@
 </script>
 
 <div class="wrap">
-	<Stage width={400} height={550} bind:this={stageSmall}>
+	<Stage width={400} height={550} bind:this={stage}>
 		<Layer>
 			<Image {image} x={-700} y={-50} />
 			<Text {...titleSmallTextConfig} />
