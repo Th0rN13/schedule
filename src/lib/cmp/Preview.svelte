@@ -1,6 +1,13 @@
 <script lang="ts">
 	import LargeCanvasView from './LargeCanvasView.svelte';
 	import SmallCanvasView from './SmallCanvasView.svelte';
+	import { fly } from 'svelte/transition';
+
+	let view: 'large' | 'small' = $state('large');
+
+	function toggleView() {
+		view = view === 'large' ? 'small' : 'large';
+	}
 </script>
 
 <!-- Main Preview Area -->
@@ -14,11 +21,26 @@
 	</div>
 	<div class="preview-container">
 		<div class="canvas-wrapper">
-			<div class="preview-content">
-				<LargeCanvasView />
-
-				<!-- <SmallCanvasView /> -->
-			</div>
+			{#if view === 'large'}
+				<div
+					class="preview-content"
+					in:fly={{ x: -2000, duration: 300 }}
+					out:fly={{ x: -2000, duration: 300 }}
+				>
+					<LargeCanvasView />
+				</div>
+			{:else}
+				<div
+					class="preview-content"
+					in:fly={{ x: 2000, duration: 300 }}
+					out:fly={{ x: 2000, duration: 300 }}
+				>
+					<SmallCanvasView />
+				</div>
+			{/if}
+		</div>
+		<div>
+			<button class="btn btn-primary" onclick={toggleView}> ⇄ </button>
 		</div>
 	</div>
 </main>
@@ -32,6 +54,10 @@
 		width: 100%;
 		height: 100%;
 		position: relative;
+	}
+	.preview-container {
+		display: flex;
+		flex-direction: column;
 	}
 	.preview-content {
 		position: absolute;

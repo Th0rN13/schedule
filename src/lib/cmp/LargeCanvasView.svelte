@@ -15,7 +15,6 @@
 		img.crossOrigin = 'Anonymous';
 		img.onload = () => {
 			image = img;
-			// imageSmall = img;
 		};
 	});
 

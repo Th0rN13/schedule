@@ -17,7 +17,7 @@ export interface TextConfig {
     fill: HexColor;
     align: CanvasTextAlign;
     verticalAlign: CanvasTextBaseline;
-    wrap?: string;
+    wrap?: 'none';
     ellipsis: boolean;
     rotation?: number;
     shadowColor?: string;
