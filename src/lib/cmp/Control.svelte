@@ -43,10 +43,6 @@
 				float
 				on:change={setcenterTextOffset}
 			></RangeSlider>
-			<!-- <div class="slider-container">
-				<input type="range" id="textOffset" min="0" max="100" value="80" class="slider" />
-				<span class="slider-value" id="offsetValue">80%</span>
-			</div> -->
 		</label>
 	</div>
 	<div class="button-group">

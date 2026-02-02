@@ -1,12 +1,12 @@
 import { LocalStorageService } from '$lib/services/LocalStorageService';
 import { writable } from 'svelte/store';
 
-export interface SchedulteItem {
+export interface ScheduleItem {
     text: string;
     enabled: boolean;
 }
 
-type SchedulesState = Array<SchedulteItem>;
+type SchedulesState = Array<ScheduleItem>;
 
 function createStore() {
     const data = LocalStorageService.load();

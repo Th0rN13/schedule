@@ -1,5 +1,4 @@
 <script lang="ts">
-	import font from '$lib/Gilroy-Bold.woff';
 	import SideBar from '$lib/cmp/SideBar.svelte';
 	import Preview from '$lib/cmp/Preview.svelte';
 
@@ -34,14 +33,3 @@
 
 <SideBar />
 <Preview />
-
-<style>
-	@font-face {
-		font-family: 'Gilroy-Bold';
-		font-style: normal;
-		font-weight: 400;
-		src:
-			local('Gilroy-Bold'),
-			url('$lib/Gilroy-Bold.woff') format('woff');
-	}
-</style>

@@ -1,4 +1,5 @@
 <script lang="ts">
+	import font from '$lib/Gilroy-Bold.woff';
 	import background from '$lib/sapa_bg.png';
 	import { configStore } from '$lib/stores/config';
 	import { schedulesStore } from '$lib/stores/schedule';
@@ -352,5 +353,14 @@
 	.grid-note {
 		grid-column: 2 / 5;
 		grid-row: 4 / 5;
+	}
+
+	@font-face {
+		font-family: 'Gilroy-Bold';
+		font-style: normal;
+		font-weight: 400;
+		src:
+			local('Gilroy-Bold'),
+			url('$lib/Gilroy-Bold.woff') format('woff');
 	}
 </style>
