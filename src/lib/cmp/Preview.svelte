@@ -21,8 +21,8 @@
 	<div class="preview-container">
 		<div class="canvas-wrapper">
 			<div
-				class="preview-content"
-				class:large={view === 'large'}
+				class="preview-content large"
+				class:view-large={view === 'large'}
 				in:fly={{ x: -2000, duration: 300 }}
 				out:fly={{ x: -2000, duration: 300 }}
 			>
@@ -30,8 +30,8 @@
 			</div>
 
 			<div
-				class="preview-content-small"
-				class:large={view === 'large'}
+				class="preview-content small"
+				class:view-large={view === 'large'}
 				in:fly={{ x: 2000, duration: 300 }}
 				out:fly={{ x: 2000, duration: 300 }}
 			>
@@ -45,6 +45,42 @@
 </main>
 
 <style>
+	.preview-area {
+		flex: 1;
+		display: flex;
+		flex-direction: column;
+		padding: 20px;
+		overflow: hidden;
+	}
+
+	.preview-header {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		margin-bottom: 16px;
+		flex-shrink: 0;
+	}
+
+	.preview-header h2 {
+		font-size: 20px;
+		font-weight: 700;
+		color: var(--text-primary);
+	}
+
+	.preview-container {
+		display: flex;
+		flex-direction: column;
+		background: var(--surface);
+		border-radius: var(--radius-lg);
+		box-shadow: var(--shadow-lg);
+		padding: 16px;
+		flex: 1;
+		align-items: center;
+		justify-content: center;
+		overflow: hidden;
+		max-height: calc(100vh - 120px);
+	}
+
 	.canvas-wrapper {
 		display: flex;
 		align-items: center;
@@ -54,36 +90,23 @@
 		height: 100%;
 		position: relative;
 	}
-	.preview-container {
-		display: flex;
-		flex-direction: column;
-	}
+
 	.preview-content {
 		position: absolute;
 		top: 50%;
 		left: 50%;
-		transform: translate(calc(-2000px - 50%), -50%) scale(0.4);
 		transition: 300ms;
 		&.large {
-			transform: translate(-50%, -50%) scale(0.4);
+			transform: translate(calc(-2000px - 50%), -50%) scale(0.4);
+			&.view-large {
+				transform: translate(-50%, -50%) scale(0.4);
+			}
 		}
-	}
-	.preview-content-small {
-		position: absolute;
-		top: 50%;
-		left: 50%;
-		transform: translate(-50%, -50%) scale(1);
-		transition: 300ms;
-		&.large {
-			transform: translate(calc(2000px - 50%), -50%) scale(1);
+		&.small {
+			transform: translate(-50%, -50%) scale(1);
+			&.view-large {
+				transform: translate(calc(2000px - 50%), -50%) scale(1);
+			}
 		}
-	}
-	@font-face {
-		font-family: 'Gilroy-Bold';
-		font-style: normal;
-		font-weight: 400;
-		src:
-			local('Gilroy-Bold'),
-			url('$lib/Gilroy-Bold.woff') format('woff');
 	}
 </style>
