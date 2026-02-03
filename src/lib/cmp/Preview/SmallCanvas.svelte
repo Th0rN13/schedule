@@ -1,10 +1,10 @@
 <script lang="ts">
 	import background from '$lib/sapa_bg.png';
-	import { slotShortAddTexts, TOTAL_SCHEDULE_ITEMS } from '$lib/constants';
 	import { configStore } from '$lib/stores/config';
 	import { schedulesStore } from '$lib/stores/schedule';
 	import { Stage, Layer, Image, Text } from 'svelte-konva';
 	import { stageStore } from '$lib/stores/stage';
+	import { CanvasService } from '$lib/services/CanvasService';
 
 	let stage: Stage | undefined = $state();
 	let image: HTMLImageElement | undefined = $state(undefined);
@@ -13,99 +13,32 @@
 		if (stage) {
 			stageStore.updateSmall(stage);
 		}
-	});
-
-	$effect(() => {
 		const img = document.createElement('img');
 		img.src = background;
 		img.crossOrigin = 'Anonymous';
 		img.onload = () => {
 			image = img;
-			// imageSmall = img;
 		};
 	});
 
-	let smallLineHeight: number = $derived.by(() => {
-		let count = $schedulesStore.filter((el) => el.enabled).length;
-		if (count < 3) {
-			return 140;
-		}
-		return Math.floor((TOTAL_SCHEDULE_ITEMS * 30) / count);
-	});
-
-	const defaultTextConfig = $derived({
-		fontSize: 30,
-		padding: 0,
-		fontFamily: 'Gilroy-Bold',
-		fill: $configStore.textColor,
-		shadowColor: 'white',
-		shadowBlur: 10,
-		shadowOpacity: 1,
-		shadowEnabled: true,
-		wrap: 'none',
-		ellipsis: true
-	});
-
-	const titleSmallTextConfig = $derived({
-		...defaultTextConfig,
-		text: 'Расписание',
-		fontSize: 30,
-		x: 0,
-		y: 0,
-		height: 100,
-		width: 400,
-		align: 'center',
-		verticalAlign: 'middle'
-	});
-
-	const smallTextConfigsConst = $derived.by(() => {
-		let texts = slotShortAddTexts.filter((_, idx) => $schedulesStore[idx].enabled);
-
-		return texts.map((el, idx) => {
-			let x = 20;
-			let y = 100 + idx * smallLineHeight;
-			return {
-				...defaultTextConfig,
-				fontSize: 22,
-				fill: $configStore.textColor,
-				text: el,
-				align: 'left',
-				width: 100,
-				x,
-				y
-			};
-		});
-	});
-
-	const smallTextConfigs = $derived.by(() => {
-		let texts = $schedulesStore.filter((e) => e.enabled);
-
-		return texts.map((el, idx) => {
-			let x = 140;
-			let y = 100 + idx * smallLineHeight;
-			return {
-				...defaultTextConfig,
-				fontSize: 22,
-				fill: $configStore.textColor,
-				text: el.text,
-				align: 'left',
-				width: 240,
-				x,
-				y
-			};
-		});
-	});
+	const titleConfig = $derived(CanvasService.generateSmallTitleConfig($configStore));
+	const slotConfigs = $derived(
+		CanvasService.generateSmallLabelsConfigs($schedulesStore, $configStore)
+	);
+	const textConfigs = $derived(
+		CanvasService.generateSmallTextConfigs($schedulesStore, $configStore)
+	);
 </script>
 
 <div class="wrap">
 	<Stage width={400} height={550} bind:this={stage}>
 		<Layer>
 			<Image {image} x={-700} y={-50} />
-			<Text {...titleSmallTextConfig} />
-			{#each smallTextConfigsConst as textConfig, idx}
+			<Text {...titleConfig} />
+			{#each slotConfigs as textConfig}
 				<Text {...textConfig} />
 			{/each}
-			{#each smallTextConfigs as textConfig, idx}
+			{#each textConfigs as textConfig}
 				<Text {...textConfig} />
 			{/each}
 		</Layer>

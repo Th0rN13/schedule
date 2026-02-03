@@ -1,4 +1,5 @@
-export const TOTAL_SCHEDULE_ITEMS = 14;
+export const DAYS_IN_WEEK = 7;
+export const TOTAL_SCHEDULE_ITEMS = DAYS_IN_WEEK * 2;
 
 export const CANVAS_CONFIG = {
     totalWidth: 1920,
@@ -71,7 +72,7 @@ export const dayTexts = [
 
 export const dayOrders = [0, 2, 4, 1, 3, 5, 6];
 
-export const slotShortAddTexts = [
+export const slotShortTexts = [
     'Пн 09:00',
     'Пн 19:00',
     'Вт 09:00',

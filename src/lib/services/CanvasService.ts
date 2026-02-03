@@ -1,4 +1,4 @@
-import { CANVAS_CONFIG, dayTexts, LABEL_TEXTS, slotAddTexts } from "$lib/constants";
+import { CANVAS_CONFIG, dayTexts, LABEL_TEXTS, slotAddTexts, slotShortTexts, TOTAL_SCHEDULE_ITEMS } from "$lib/constants";
 import type { ConfigState } from "$lib/stores/config";
 import type { SchedulesState } from "$lib/stores/schedule";
 import type { ScheduleItem, HexColor } from "$lib/types";
@@ -50,21 +50,8 @@ export const defaultTextConfig: TextConfig = {
 };
 
 export class CanvasService {
-    static createTextConfig(options: Partial<TextConfig>): TextConfig {
-        return defaultTextConfig
-    }
 
-    static calculatePosition(index: number, isSmall: boolean): Position {
-        return {
-            x: 0,
-            y: 0
-        }
-    }
-
-    static generateTextConfigs(data: ScheduleItem, isSmall: boolean): TextConfig {
-        return defaultTextConfig
-    }
-
+    // Large Canvas Title
     static generateTitleConfig(configState: ConfigState): TextConfig {
         return {
             ...defaultTextConfig,
@@ -80,6 +67,7 @@ export class CanvasService {
         }
     }
 
+    // Large Canvas footnote
     static generateFootNoteConfig(configState: ConfigState): TextConfig {
         return {
             ...defaultTextConfig,
@@ -94,6 +82,7 @@ export class CanvasService {
         }
     }
 
+    // Large Canvas days of week positions
     static getDayTextPositions(configState: ConfigState): Position[] {
         return dayTexts.map((_, idx) => {
             let x = CANVAS_CONFIG.columnGap;
@@ -116,6 +105,7 @@ export class CanvasService {
         })
     }
 
+    // Large Canvas days of week labels
     static generatDayTextConfigs(configState: ConfigState): TextConfig[] {
         let positions = this.getDayTextPositions(configState);
         return dayTexts.map((text, idx) => {
@@ -132,9 +122,9 @@ export class CanvasService {
                     : CANVAS_CONFIG.columnWidth,
             }
         });
-
     }
 
+    // Large Canvas schedule slots positions
     static getSlotTextPositions(schedulesState: SchedulesState, configState: ConfigState): Position[] {
         return schedulesState.map((_, idx) => {
             let x = CANVAS_CONFIG.columnGap;
@@ -158,6 +148,7 @@ export class CanvasService {
         })
     }
 
+    // Large Canvas schedule slots labels
     static generatSlotTextConfigs(schedulesState: SchedulesState, configState: ConfigState): TextConfig[] {
         let positions = this.getSlotTextPositions(schedulesState, configState);
         return schedulesState.map(({ text, enabled }, idx) => {
@@ -177,6 +168,7 @@ export class CanvasService {
 
     }
 
+    // Large Canvas days off positions
     static getDaysOffTextPositions(days: boolean[], configState: ConfigState): Position[] {
         return days.map((_, idx) => {
             let x = CANVAS_CONFIG.columnGap - 40;
@@ -199,6 +191,7 @@ export class CanvasService {
         })
     }
 
+    // Large Canvas days off labels
     static generatDaysOffTextConfigs(schedulesState: SchedulesState, configState: ConfigState): TextConfig[] {
         const daysOff = [...chunks(schedulesState, 2)].map((day) => day.every((slot) => !slot.enabled));
         let positions = this.getDaysOffTextPositions(daysOff, configState);
@@ -218,6 +211,70 @@ export class CanvasService {
                         ? CANVAS_CONFIG.columnWidth * 2 + CANVAS_CONFIG.columnGap
                         : CANVAS_CONFIG.columnWidth,
             }
+        });
+
+    }
+
+    // Small Canvas line height for spread lines
+    static calculateSmallLineHeight(schedulesState: SchedulesState): number {
+        let count = schedulesState.filter((el) => el.enabled).length;
+        if (count < 3) {
+            return 140;
+        }
+        return Math.floor((TOTAL_SCHEDULE_ITEMS * 30) / count);
+    }
+
+
+    static generateSmallTitleConfig(configState: ConfigState): TextConfig {
+        return {
+            ...defaultTextConfig,
+            fill: configState.textColor,
+            text: LABEL_TEXTS.title,
+            fontSize: 30,
+            x: 0,
+            y: 0,
+            height: 100,
+            width: 400,
+            align: 'center',
+            verticalAlign: 'middle'
+        }
+    }
+
+    static generateSmallLabelsConfigs(schedulesState: SchedulesState, configState: ConfigState): TextConfig[] {
+        let labels = schedulesState.filter(({ enabled }, idx) => enabled);
+
+        return labels.map((_, idx) => {
+            let x = 20;
+            let y = 100 + idx * this.calculateSmallLineHeight(schedulesState);
+            return {
+                ...defaultTextConfig,
+                fill: configState.textColor,
+                fontSize: 22,
+                text: slotShortTexts[idx],
+                align: 'left',
+                width: 100,
+                x,
+                y
+            };
+        });
+    }
+
+    static generateSmallTextConfigs(schedulesState: SchedulesState, configState: ConfigState): TextConfig[] {
+        let labels = schedulesState.filter(({ enabled }, idx) => enabled);
+
+        return labels.map(({ text }, idx) => {
+            let x = 140;
+            let y = 100 + idx * this.calculateSmallLineHeight(schedulesState);
+            return {
+                ...defaultTextConfig,
+                fill: configState.textColor,
+                fontSize: 22,
+                text,
+                align: 'left',
+                width: 240,
+                x,
+                y
+            };
         });
 
     }
