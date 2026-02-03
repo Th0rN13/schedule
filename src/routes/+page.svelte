@@ -8,4 +8,3 @@
 <SideBar />
 <Preview />
 <ModalView isActive={$configStore.viewModal} />
-{$configStore.viewModal}

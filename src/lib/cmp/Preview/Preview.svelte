@@ -94,15 +94,15 @@
 		left: 50%;
 		transition: 300ms;
 		&.large {
-			transform: translate(calc(-2000px - 50%), -50%) scale(0.4);
+			transform: translate(calc(-2000px - 50%), -50%);
 			&.view-large {
-				transform: translate(-50%, -50%) scale(0.4);
+				transform: translate(-50%, -50%);
 			}
 		}
 		&.small {
-			transform: translate(-50%, -50%) scale(1);
+			transform: translate(-50%, -50%);
 			&.view-large {
-				transform: translate(calc(2000px - 50%), -50%) scale(1);
+				transform: translate(calc(2000px - 50%), -50%);
 			}
 		}
 	}
