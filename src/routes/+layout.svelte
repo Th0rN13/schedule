@@ -7,3 +7,11 @@
 <div class="app-container">
 	{@render children()}
 </div>
+
+<style>
+	.app-container {
+		display: flex;
+		height: 100vh;
+		overflow: hidden;
+	}
+</style>
