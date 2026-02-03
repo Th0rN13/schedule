@@ -3,6 +3,13 @@ name: Deploy SvelteKit
 on:
   push:
     branches: [main]
+    paths:
+      - 'src/**'
+      - 'package.json'
+      - 'tsconfig.json'
+      - 'svelte.config.js'
+      - 'vite.config.js'
+      - '.github/workflows/**'
   workflow_dispatch:
 
 permissions:
