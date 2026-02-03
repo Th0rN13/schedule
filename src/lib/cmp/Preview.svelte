@@ -10,7 +10,6 @@
 	}
 </script>
 
-<!-- Main Preview Area -->
 <main class="preview-area">
 	<div class="preview-header">
 		<h2>Предпросмотр расписания</h2>

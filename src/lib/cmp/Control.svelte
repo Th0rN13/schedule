@@ -55,7 +55,6 @@
 	}
 </script>
 
-<!-- Customization -->
 <div class="section settings-section">
 	<h2 class="section-title">Настройки дизайна</h2>
 
@@ -90,7 +89,6 @@
 	</div>
 </div>
 
-<!-- Actions -->
 <div class="section export-section">
 	<h2 class="section-title">Экспорт</h2>
 	<div class="button-group">

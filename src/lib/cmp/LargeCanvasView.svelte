@@ -239,13 +239,4 @@
 		grid-column: 2 / 5;
 		grid-row: 4 / 5;
 	}
-
-	@font-face {
-		font-family: 'Gilroy-Bold';
-		font-style: normal;
-		font-weight: 400;
-		src:
-			local('Gilroy-Bold'),
-			url('$lib/Gilroy-Bold.woff') format('woff');
-	}
 </style>

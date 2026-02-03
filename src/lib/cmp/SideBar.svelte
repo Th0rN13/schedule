@@ -12,7 +12,6 @@
 
 	<div class="sidebar-content">
 		<ScheduleTable />
-
 		<Control />
 	</div>
 </aside>
