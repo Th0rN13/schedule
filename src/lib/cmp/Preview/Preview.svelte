@@ -1,4 +1,5 @@
 <script lang="ts">
+	import Button from '../UI/Button.svelte';
 	import LargeCanvasView from './LargeCanvas.svelte';
 	import SmallCanvasView from './SmallCanvas.svelte';
 	import { fly } from 'svelte/transition';
@@ -13,10 +14,6 @@
 <main class="preview-area">
 	<div class="preview-header">
 		<h2>Предпросмотр расписания</h2>
-		<button class="btn btn-secondary">
-			<span class="icon">🖼️</span>
-			Посмотреть полный размер
-		</button>
 	</div>
 	<div class="preview-container">
 		<div class="canvas-wrapper">
@@ -39,7 +36,7 @@
 			</div>
 		</div>
 		<div>
-			<button class="btn btn-primary" onclick={toggleView}> ⇄ </button>
+			<Button isPrimary onclick={toggleView} icon="switch" label="" />
 		</div>
 	</div>
 </main>
