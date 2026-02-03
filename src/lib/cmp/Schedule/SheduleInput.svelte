@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { schedulesStore } from '$lib/stores/schedule';
-	import IconButton from './UI/IconButton.svelte';
+	import IconButton from '../UI/IconButton.svelte';
 
 	interface PropType {
 		label: string;

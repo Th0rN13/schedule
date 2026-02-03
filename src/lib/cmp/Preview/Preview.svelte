@@ -1,6 +1,6 @@
 <script lang="ts">
-	import LargeCanvasView from './LargeCanvasView.svelte';
-	import SmallCanvasView from './SmallCanvasView.svelte';
+	import LargeCanvasView from './LargeCanvas.svelte';
+	import SmallCanvasView from './SmallCanvas.svelte';
 	import { fly } from 'svelte/transition';
 
 	let view: 'large' | 'small' = $state('large');

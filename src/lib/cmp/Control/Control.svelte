@@ -1,11 +1,11 @@
 <script lang="ts">
-	import SettingsControl from './SettingsControl.svelte';
-	import DownloadControl from './DownloadControl.svelte';
+	import Settings from './Settings.svelte';
+	import Download from './Download.svelte';
 </script>
 
 <div class="control">
-	<SettingsControl />
-	<DownloadControl />
+	<Settings />
+	<Download />
 </div>
 
 <style>

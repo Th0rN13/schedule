@@ -1,7 +1,9 @@
 <script lang="ts">
 	import { stageStore } from '$lib/stores/stage';
 	import { getNearestMonday } from '$lib/utils';
-	import Section from './UI/Section.svelte';
+	import Button from '../UI/Button.svelte';
+	import ButtonGroup from '../UI/ButtonGroup.svelte';
+	import Section from '../UI/Section.svelte';
 
 	function downloadLarge() {
 		let stage = $stageStore.stageLarge;
@@ -36,14 +38,20 @@
 </script>
 
 <Section title="Скачать">
-	<div class="button-group">
-		<button class="btn btn-primary" onclick={downloadLarge}>
-			<span class="icon">⬇️</span>
-			Большое
-		</button>
-		<button class="btn btn-primary" onclick={downloadSmall}>
-			<span class="icon">⬇️</span>
-			Маленькое
-		</button>
-	</div>
+	<ButtonGroup>
+		<Button
+			isPrimary
+			onclick={downloadLarge}
+			label="Большое"
+			icon="download"
+			title="Скачать большое расписание"
+		/>
+		<Button
+			isPrimary
+			onclick={downloadSmall}
+			label="Маленькое"
+			icon="download"
+			title="Скачать маленькое расписание"
+		/>
+	</ButtonGroup>
 </Section>

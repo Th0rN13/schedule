@@ -1,7 +1,9 @@
 <script lang="ts">
 	import { configStore } from '$lib/stores/config';
 	import RangeSlider from 'svelte-range-slider-pips';
-	import Section from './UI/Section.svelte';
+	import Section from '../UI/Section.svelte';
+	import ButtonGroup from '../UI/ButtonGroup.svelte';
+	import Button from '../UI/Button.svelte';
 
 	let currentColor = $state($configStore.textColor);
 	let centerTextOffset = $state($configStore.centerTextOffset);
@@ -43,14 +45,8 @@
 			></RangeSlider>
 		</label>
 	</div>
-	<div class="button-group">
-		<button class="btn btn-secondary" onclick={toggleCanvas}>
-			<span class="icon">🖼️</span>
-			Увеличить
-		</button>
-		<button class="btn btn-secondary" onclick={toggleGrid}>
-			<span class="icon">📐</span>
-			Сетка
-		</button>
-	</div>
+	<ButtonGroup>
+		<Button onclick={toggleCanvas} icon="picture" label="Увеличить" />
+		<Button onclick={toggleGrid} icon="grid" label="Сетка" />
+	</ButtonGroup>
 </Section>

@@ -1,6 +1,6 @@
 <script lang="ts">
-	import Control from './Control.svelte';
-	import ScheduleTable from './ScheduleTable.svelte';
+	import Control from './Control/Control.svelte';
+	import ScheduleTable from './Schedule/ScheduleTable.svelte';
 </script>
 
 <!-- Sidebar -->

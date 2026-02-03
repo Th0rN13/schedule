@@ -3,7 +3,7 @@
 	import { schedulesStore } from '$lib/stores/schedule';
 	import ScheduleDay from './ScheduleDay.svelte';
 	import SheduleInput from './SheduleInput.svelte';
-	import Section from './UI/Section.svelte';
+	import Section from '../UI/Section.svelte';
 	dayTexts;
 </script>
 
