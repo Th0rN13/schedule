@@ -131,7 +131,7 @@ export class CanvasBaseService {
 **Конкретные проблемы:**
 
 - [`ScheduleDay.svelte`](src/lib/cmp/Schedule/ScheduleDay.svelte:1) напрямую использует schedulesStore
-- [`SheduleInput.svelte`](src/lib/cmp/Schedule/SheduleInput.svelte:1) вызывает методы store напрямую
+- [`ScheduleInput.svelte`](src/lib/cmp/Schedule/ScheduleInput.svelte:1) вызывает методы store напрямую
 
 **Решение:**
 
@@ -204,7 +204,7 @@ export class LocalStorageService {
 
 - [`setcenterTextOffset()`](src/lib/stores/config.ts:36) - должно быть `setCenterTextOffset`
 - [`generatDayTextConfigs()`](src/lib/services/CanvasService.ts:109) - пропущена 'e' в "generate"
-- [`SheduleInput.svelte`](src/lib/cmp/Schedule/SheduleInput.svelte:1) - опечатка в "Schedule"
+- [`ScheduleInput.svelte`](src/lib/cmp/Schedule/ScheduleInput.svelte:1) - опечатка в "Schedule"
 
 ## 7. **Проблема: Отсутствие error boundaries**
 

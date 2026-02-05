@@ -241,16 +241,16 @@ export class CanvasService {
     }
 
     static generateSmallLabelsConfigs(schedulesState: SchedulesState, configState: ConfigState): TextConfig[] {
-        let labels = schedulesState.filter(({ enabled }, idx) => enabled);
+        let labels = schedulesState.map(({ enabled }, idx) => ({ text: slotShortTexts[idx], enabled })).filter(({ enabled }, idx) => enabled);
 
-        return labels.map((_, idx) => {
+        return labels.map(({ text }, idx) => {
             let x = 20;
             let y = 100 + idx * this.calculateSmallLineHeight(schedulesState);
             return {
                 ...defaultTextConfig,
                 fill: configState.textColor,
                 fontSize: 22,
-                text: slotShortTexts[idx],
+                text: text,
                 align: 'left',
                 width: 100,
                 x,

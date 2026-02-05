@@ -24,7 +24,6 @@ function updateLocalStorage<T extends LocalStorageData>(
 export class LocalStorageService {
     static save(data: LocalStorageData) {
         localStorage.setItem('schedule', JSON.stringify(data));
-        localStorage.removeItem('shedule');
     }
 
     static update(data: Partial<LocalStorageData>) {

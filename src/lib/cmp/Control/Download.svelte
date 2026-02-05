@@ -27,7 +27,7 @@
 			callback(img: string) {
 				let downloadLink = document.createElement('a');
 				let url = img.replace(/^data:image\/png/, 'data:application/octet-stream');
-				downloadLink.setAttribute('download', 'Shedule_small.png');
+				downloadLink.setAttribute('download', 'Schedule_small.png');
 
 				downloadLink.setAttribute('href', url);
 				downloadLink.target = '_self';
