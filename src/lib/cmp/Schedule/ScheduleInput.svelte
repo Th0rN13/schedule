@@ -34,6 +34,7 @@
 		bind:value={text}
 		placeholder="Введите текст..."
 		onchange={change}
+		oninput={change}
 	/>
 	<div class="schedule-actions">
 		<IconButton label={enabled ? '✅' : '❌'} title="Переключить" onclick={toggle} />
