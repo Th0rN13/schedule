@@ -19,5 +19,8 @@
 		grid-template-columns: 1fr 1fr;
 		gap: 8px;
 		overflow: hidden;
+		& :global(*):last-child {
+			grid-column-end: -1;
+		}
 	}
 </style>
